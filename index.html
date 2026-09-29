@@ -1,0 +1,2957 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>W & H | Wedding Invitation</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- QR CODE LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    overflow-x:hidden;
+    background:#e9e1dc;
+}
+
+
+/* =========================================================
+   FIXED BACKGROUND
+   الصورة أصبحت طبقة ثابتة مستقلة عن الأقسام
+========================================================= */
+
+.page-background{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    z-index:-5;
+
+    background-image:url("background.jpg");
+
+    background-repeat:no-repeat;
+
+    /*
+       لا نستخدم cover بشكل أعمى
+    */
+
+    background-size:100% 100%;
+
+    background-position:center center;
+
+    background-attachment:fixed;
+
+}
+
+
+/* طبقة حماية خفيفة */
+
+.page-background::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        rgba(255,255,255,.055);
+
+}
+
+
+/* =========================================================
+   INTRO VIDEO
+========================================================= */
+
+#intro{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100dvh;
+
+    background:#000;
+
+    z-index:99999;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    opacity:1;
+    visibility:visible;
+
+    transition:
+        opacity 1.3s ease,
+        visibility 1.3s ease;
+}
+
+
+#intro.hidden{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+}
+
+
+#introVideo{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+
+.intro-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.08);
+
+    pointer-events:none;
+}
+
+
+.skip-button{
+
+    position:absolute;
+
+    bottom:35px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    padding:13px 28px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.65);
+
+    border-radius:40px;
+
+    background:
+        rgba(70,10,28,.35);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    color:white;
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.3s ease;
+}
+
+
+.skip-button:hover{
+
+    background:
+        rgba(100,21,42,.75);
+
+}
+
+
+/* =========================================================
+   INVITATION
+========================================================= */
+
+#invitation{
+
+    position:relative;
+
+    min-height:100vh;
+
+    display:none;
+
+    overflow:hidden;
+}
+
+
+.invitation-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+/* =========================================================
+   GLASS CARD
+========================================================= */
+
+.hero-card,
+.detail-card,
+.location-card,
+.countdown,
+.privacy-card{
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.27),
+            rgba(255,255,255,.075)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.65);
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(50,10,20,.10),
+
+        inset 0 1px 0
+        rgba(255,255,255,.65);
+}
+
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+.music-control{
+
+    position:fixed;
+
+    top:20px;
+    left:20px;
+
+    width:56px;
+    height:56px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(201,167,101,.85);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.88),
+            rgba(255,255,255,.30)
+        );
+
+    backdrop-filter:blur(15px);
+
+    -webkit-backdrop-filter:blur(15px);
+
+    z-index:500;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 8px 28px
+        rgba(55,10,25,.18),
+
+        inset 0 1px 1px
+        rgba(255,255,255,.85);
+
+    transition:.35s ease;
+}
+
+
+.music-control::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:42px;
+    height:42px;
+
+    border:
+        1px solid
+        rgba(201,167,101,.42);
+
+    border-radius:50%;
+}
+
+
+.music-control::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#c9a765;
+
+    top:8px;
+    right:13px;
+}
+
+
+.music-icon{
+
+    position:relative;
+
+    width:22px;
+    height:27px;
+
+    z-index:2;
+}
+
+
+.music-icon::before{
+
+    content:"";
+
+    position:absolute;
+
+    right:4px;
+    top:1px;
+
+    width:2px;
+    height:19px;
+
+    background:#64152a;
+
+    border-radius:3px;
+}
+
+
+.music-icon::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-1px;
+    bottom:1px;
+
+    width:10px;
+    height:7px;
+
+    background:#64152a;
+
+    border-radius:50%;
+
+    transform:rotate(-18deg);
+}
+
+
+.music-note{
+
+    position:absolute;
+
+    top:1px;
+    left:5px;
+
+    width:14px;
+    height:2px;
+
+    background:#64152a;
+
+    border-radius:3px;
+
+    transform:rotate(-8deg);
+}
+
+
+.music-control.playing{
+
+    animation:
+        musicPulse 2.5s ease-in-out infinite;
+}
+
+
+.music-control.playing .music-icon{
+
+    animation:
+        musicRotate 3s linear infinite;
+}
+
+
+@keyframes musicPulse{
+
+    0%,100%{
+
+        box-shadow:
+            0 8px 28px
+            rgba(55,10,25,.18),
+            0 0 0
+            rgba(201,167,101,0);
+
+    }
+
+    50%{
+
+        box-shadow:
+            0 8px 30px
+            rgba(55,10,25,.22),
+            0 0 18px
+            rgba(201,167,101,.30);
+
+    }
+}
+
+
+@keyframes musicRotate{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+
+
+/* =========================================================
+   QURAN & WEDDING DUA
+   ========================================================= */
+
+.quran-dua{
+    width:min(700px,94%);
+    margin:34px auto 0;
+    padding:34px 24px 30px;
+    text-align:center;
+    border-radius:26px;
+    background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(255,255,255,.09));
+    border:1px solid rgba(255,255,255,.65);
+    backdrop-filter:blur(9px);
+    -webkit-backdrop-filter:blur(9px);
+    box-shadow:0 20px 55px rgba(50,10,20,.10),inset 0 1px 0 rgba(255,255,255,.70);
+    position:relative;
+    overflow:hidden;
+}
+
+.quran-dua::before{
+    content:"";
+    position:absolute;
+    inset:11px;
+    border:1px solid rgba(201,167,101,.48);
+    border-radius:18px;
+    pointer-events:none;
+}
+
+.quran-dua-label{
+    font-family:"Amiri",serif;
+    font-size:18px;
+    color:#8d6a37;
+    margin-bottom:13px;
+    position:relative;
+    z-index:1;
+}
+
+.quran-verse{
+    font-family:"Amiri",serif;
+    font-size:25px;
+    line-height:2;
+    color:#64152a;
+    position:relative;
+    z-index:1;
+}
+
+.quran-reference{
+    font-family:"Amiri",serif;
+    font-size:15px;
+    color:#75646a;
+    margin-top:8px;
+    position:relative;
+    z-index:1;
+}
+
+.dua-divider{
+    width:70px;
+    height:1px;
+    margin:22px auto 19px;
+    background:linear-gradient(to right,transparent,#c9a765,transparent);
+    position:relative;
+    z-index:1;
+}
+
+.wedding-dua{
+    font-family:"Amiri",serif;
+    font-size:21px;
+    line-height:2;
+    color:#302629;
+    position:relative;
+    z-index:1;
+}
+
+@media(max-width:650px){
+    .quran-dua{
+        width:97%;
+        padding:29px 17px 27px;
+        margin-top:25px;
+    }
+    .quran-verse{font-size:21px;line-height:2.05;}
+    .wedding-dua{font-size:18px;line-height:2;}
+    .quran-dua-label{font-size:16px;}
+}
+
+@media(max-width:400px){
+    .quran-verse{font-size:19px;}
+    .wedding-dua{font-size:17px;}
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    min-height:100dvh;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:40px 15px;
+}
+
+
+.hero-card{
+
+    width:min(700px,94%);
+
+    padding:
+        65px 35px 60px;
+
+    text-align:center;
+
+    border-radius:28px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+.hero-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:13px;
+
+    border:
+        1px solid
+        rgba(201,167,101,.65);
+
+    border-radius:20px;
+
+    pointer-events:none;
+}
+
+
+.hero-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:25px;
+
+    border-top:
+        1px solid
+        rgba(201,167,101,.22);
+
+    border-bottom:
+        1px solid
+        rgba(201,167,101,.22);
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   MONOGRAM
+========================================================= */
+
+.monogram-wrapper{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    height:190px;
+
+    margin-bottom:25px;
+
+    direction:ltr;
+}
+
+
+.monogram-decoration{
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border:
+        1px solid
+        rgba(201,167,101,.48);
+
+    transform:rotate(45deg);
+
+    border-radius:50%;
+}
+
+
+.monogram{
+
+    position:relative;
+
+    z-index:2;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(95px,18vw,150px);
+
+    font-weight:500;
+
+    line-height:.75;
+
+    letter-spacing:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8d6a37,
+            #e8cc8c,
+            #b38b4c,
+            #f0dca5,
+            #96723d
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+
+    text-shadow:
+        0 3px 15px
+        rgba(90,55,15,.18);
+}
+
+
+/* =========================================================
+   ORNAMENT
+========================================================= */
+
+.ornament{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:13px;
+
+    margin-bottom:23px;
+}
+
+
+.ornament span{
+
+    width:65px;
+    height:1px;
+
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            #c9a765
+        );
+}
+
+
+.ornament span:last-child{
+
+    background:
+        linear-gradient(
+            to left,
+            transparent,
+            #c9a765
+        );
+}
+
+
+.ornament i{
+
+    width:7px;
+    height:7px;
+
+    border:
+        1px solid
+        #c9a765;
+
+    transform:rotate(45deg);
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.invitation-label{
+
+    font-family:"Amiri",serif;
+
+    font-size:29px;
+
+    color:#64152a;
+
+    margin-bottom:5px;
+}
+
+
+.invitation-label-fr{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:23px;
+
+    font-style:italic;
+
+    color:#5e4c53;
+
+    margin-bottom:28px;
+}
+
+
+.bride-name{
+    font-family:"Cormorant Garamond","Amiri",serif;
+    font-size:38px;
+    font-weight:600;
+    color:#64152a;
+    margin:14px 0 6px;
+    letter-spacing:1px;
+}
+
+.bride-name-ar{
+    font-family:"Amiri",serif;
+    font-size:25px;
+    color:#8d6a37;
+    margin-top:2px;
+}
+
+@media(max-width:650px){
+    .bride-name{font-size:33px;}
+    .bride-name-ar{font-size:22px;}
+}
+
+.family{
+
+    font-family:"Amiri",serif;
+
+    font-size:25px;
+
+    line-height:2;
+
+    color:#302629;
+}
+
+
+.family-fr{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:22px;
+
+    line-height:1.5;
+
+    color:#5f5156;
+
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.date-card{
+
+    width:min(410px,92%);
+
+    margin:38px auto 0;
+
+    padding:25px 20px 23px;
+
+    direction:ltr;
+
+    position:relative;
+
+    background:
+        rgba(255,255,255,.19);
+
+    border:
+        1px solid
+        rgba(201,167,101,.75);
+
+    box-shadow:
+        inset 0 0 0 5px
+        rgba(255,255,255,.06);
+}
+
+
+.date-card::before,
+.date-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+    height:18px;
+
+    border-color:#c9a765;
+}
+
+
+.date-card::before{
+
+    top:-1px;
+    left:-1px;
+
+    border-top:
+        2px solid #c9a765;
+
+    border-left:
+        2px solid #c9a765;
+}
+
+
+.date-card::after{
+
+    bottom:-1px;
+    right:-1px;
+
+    border-bottom:
+        2px solid #c9a765;
+
+    border-right:
+        2px solid #c9a765;
+}
+
+
+.date-day{
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:5px;
+
+    color:#64152a;
+
+    margin-bottom:8px;
+}
+
+
+.date-number{
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:74px;
+
+    line-height:.8;
+
+    color:#64152a;
+}
+
+
+.date-month{
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    color:#66545a;
+
+    margin-top:10px;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section{
+
+    width:min(900px,92%);
+
+    margin:auto;
+
+    padding:90px 0;
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+.section-title-ar{
+
+    font-family:"Amiri",serif;
+
+    font-size:28px;
+
+    color:#64152a;
+}
+
+
+.section-title-fr{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:23px;
+
+    font-style:italic;
+
+    color:#75646a;
+
+    margin-top:3px;
+}
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+.countdown{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    max-width:620px;
+
+    margin:40px auto 0;
+
+    direction:ltr;
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+
+.count-box{
+
+    padding:23px 5px;
+
+    border-right:
+        1px solid
+        rgba(100,21,42,.15);
+}
+
+
+.count-box:last-child{
+
+    border-right:0;
+}
+
+
+.count-number{
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:45px;
+
+    color:#64152a;
+}
+
+
+.count-label{
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    color:#79696e;
+
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.details{
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.35);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.35);
+}
+
+
+.detail-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+
+    margin-top:42px;
+}
+
+
+.detail-card{
+
+    min-height:190px;
+
+    padding:30px 20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:20px;
+}
+
+
+.detail-icon{
+
+    width:50px;
+    height:50px;
+
+    border:
+        1px solid
+        #c9a765;
+
+    border-radius:50%;
+
+    margin-bottom:14px;
+
+    position:relative;
+}
+
+
+.clock-icon::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+    height:18px;
+
+    border:
+        1.5px solid
+        #64152a;
+
+    border-radius:50%;
+
+    left:15px;
+    top:15px;
+}
+
+
+.clock-icon::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:1px;
+    height:8px;
+
+    background:#64152a;
+
+    left:24px;
+    top:17px;
+}
+
+
+.detail-ar{
+
+    font-family:"Amiri",serif;
+
+    font-size:21px;
+
+    color:#33292c;
+}
+
+
+.detail-fr{
+
+    direction:ltr;
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+
+    color:#806f74;
+
+    margin-top:4px;
+}
+
+
+.detail-time{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:38px;
+
+    color:#64152a;
+
+    margin-top:7px;
+}
+
+
+/* =========================================================
+   LOCATION
+========================================================= */
+
+.location-card{
+
+    max-width:700px;
+
+    margin:42px auto 0;
+
+    padding:45px 25px;
+
+    border-radius:22px;
+}
+
+
+.location-icon{
+
+    width:52px;
+    height:52px;
+
+    border:
+        1px solid
+        #c9a765;
+
+    border-radius:50%;
+
+    margin:0 auto 18px;
+
+    position:relative;
+}
+
+
+.location-icon::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:16px;
+    height:21px;
+
+    border:
+        1.5px solid
+        #64152a;
+
+    border-radius:
+        50% 50% 50% 0;
+
+    transform:rotate(-45deg);
+
+    top:10px;
+    left:17px;
+}
+
+
+.location-icon::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:4px;
+    height:4px;
+
+    background:#64152a;
+
+    border-radius:50%;
+
+    top:18px;
+    left:23px;
+}
+
+
+.location-name{
+
+    font-family:"Amiri",serif;
+
+    font-size:29px;
+
+    color:#64152a;
+}
+
+
+.location-fr{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:25px;
+
+    color:#66575c;
+
+    margin-top:3px;
+}
+
+
+.location-city{
+
+    direction:ltr;
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:10px;
+
+    letter-spacing:4px;
+
+    color:#88777c;
+
+    margin-top:8px;
+}
+
+
+/* =========================================================
+   MAP BUTTON
+========================================================= */
+
+.maps-button{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin-top:26px;
+
+    padding:14px 30px;
+
+    background:#64152a;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-family:"Montserrat",sans-serif;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    border-radius:30px;
+
+    transition:.3s ease;
+}
+
+
+.maps-button:hover{
+
+    background:#3d0b19;
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================================================
+   QR SECTION
+========================================================= */
+
+.qr-section{
+
+    margin-top:40px;
+
+    padding-top:32px;
+
+    border-top:
+        1px solid
+        rgba(100,21,42,.13);
+}
+
+
+.qr-title{
+
+    font-family:"Amiri",serif;
+
+    font-size:20px;
+
+    color:#64152a;
+}
+
+
+.qr-subtitle{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:19px;
+
+    font-style:italic;
+
+    color:#75656a;
+
+    margin-top:3px;
+
+    margin-bottom:22px;
+}
+
+
+.qr-frame{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:14px;
+
+    background:white;
+
+    border:
+        1px solid
+        rgba(201,167,101,.75);
+
+    border-radius:14px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(50,10,20,.10);
+}
+
+
+#qrcode{
+
+    width:150px;
+    height:150px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+
+#qrcode img,
+#qrcode canvas{
+
+    display:block;
+
+    width:150px !important;
+    height:150px !important;
+}
+
+
+.qr-note{
+
+    font-family:"Amiri",serif;
+
+    font-size:16px;
+
+    color:#65575c;
+
+    margin-top:15px;
+}
+
+
+/* =========================================================
+   PRIVACY
+========================================================= */
+
+.privacy{
+
+    background:
+        rgba(61,11,25,.88);
+
+    color:white;
+
+    width:100%;
+
+    padding-left:4%;
+    padding-right:4%;
+}
+
+
+.privacy .section-title-ar{
+
+    color:white;
+}
+
+
+.privacy .section-title-fr{
+
+    color:
+        rgba(255,255,255,.70);
+}
+
+
+.privacy-grid{
+
+    width:min(900px,100%);
+
+    margin:42px auto 0;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+}
+
+
+.privacy-card{
+
+    padding:36px 22px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    border-radius:20px;
+
+    color:white;
+}
+
+
+/* =========================================================
+   CAMERA ICON
+========================================================= */
+
+.privacy-icon{
+
+    width:60px;
+    height:60px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.65);
+
+    border-radius:50%;
+
+    margin:0 auto 20px;
+
+    position:relative;
+}
+
+
+.camera-icon{
+
+    overflow:hidden;
+}
+
+
+.camera-icon::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:27px;
+    height:18px;
+
+    border:
+        1.5px solid white;
+
+    left:15px;
+    top:21px;
+
+    border-radius:3px;
+}
+
+
+.camera-icon::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    border:
+        1.5px solid white;
+
+    border-radius:50%;
+
+    left:24px;
+    top:26px;
+}
+
+
+.camera-icon span{
+
+    position:absolute;
+
+    width:43px;
+    height:1.5px;
+
+    background:white;
+
+    transform:rotate(45deg);
+
+    left:8px;
+    top:29px;
+}
+
+
+/* =========================================================
+   PRIVACY TEXT
+========================================================= */
+
+.privacy-ar{
+
+    font-family:"Amiri",serif;
+
+    font-size:20px;
+
+    line-height:1.9;
+}
+
+
+.privacy-fr{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:19px;
+
+    line-height:1.5;
+
+    color:
+        rgba(255,255,255,.72);
+
+    margin-top:9px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    padding:
+        65px 20px 80px;
+
+    text-align:center;
+
+    background:
+        rgba(248,244,239,.78);
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+.footer-monogram{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:58px;
+
+    letter-spacing:6px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #92703b,
+            #e0c485,
+            #a77d42
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
+}
+
+
+.footer-text{
+
+    font-family:"Amiri",serif;
+
+    font-size:18px;
+
+    color:#63565a;
+
+    margin-top:10px;
+}
+
+
+.footer-text-fr{
+
+    direction:ltr;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:19px;
+
+    font-style:italic;
+
+    color:#89787d;
+
+    margin-top:3px;
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+#invitation.show{
+
+    animation:
+        invitationReveal
+        1.5s ease both;
+}
+
+
+@keyframes invitationReveal{
+
+    from{
+        opacity:0;
+        transform:scale(1.015);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+    /*
+       على الهاتف نحافظ على الصورة ثابتة.
+       100% 100% يمنع التكبير العمودي الذي كان
+       يجعل الخلفية تختفي أو تظهر في قسم واحد.
+    */
+
+    .page-background{
+
+        background-size:100% 100%;
+
+        background-position:center center;
+
+        background-attachment:fixed;
+
+    }
+
+
+    .hero{
+
+        padding:
+            20px 8px;
+    }
+
+
+    .hero-card{
+
+        width:97%;
+
+        padding:
+            50px 20px 48px;
+
+        border-radius:22px;
+    }
+
+
+    .hero-card::before{
+
+        inset:9px;
+
+        border-radius:15px;
+    }
+
+
+    .hero-card::after{
+
+        inset:18px;
+    }
+
+
+    .monogram-wrapper{
+
+        height:165px;
+    }
+
+
+    .monogram{
+
+        font-size:82px;
+
+        letter-spacing:6px;
+    }
+
+
+    .monogram-decoration{
+
+        width:150px;
+        height:150px;
+    }
+
+
+    .family{
+
+        font-size:22px;
+    }
+
+
+    .family-fr{
+
+        font-size:20px;
+    }
+
+
+    .date-card{
+
+        width:96%;
+    }
+
+
+    .detail-grid{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .privacy-grid{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .count-number{
+
+        font-size:34px;
+    }
+
+
+    .count-label{
+
+        font-size:6px;
+
+        letter-spacing:1px;
+    }
+
+
+    .section{
+
+        padding:70px 0;
+    }
+
+
+    .location-card{
+
+        padding:
+            35px 17px;
+    }
+
+
+    #qrcode{
+
+        width:135px;
+        height:135px;
+    }
+
+
+    #qrcode img,
+    #qrcode canvas{
+
+        width:135px !important;
+        height:135px !important;
+    }
+
+}
+
+
+@media(max-width:400px){
+
+    .monogram{
+
+        font-size:72px;
+    }
+
+
+    .invitation-label{
+
+        font-size:24px;
+    }
+
+
+    .invitation-label-fr{
+
+        font-size:19px;
+    }
+
+
+    .date-number{
+
+        font-size:63px;
+    }
+
+}
+
+
+/* =========================================================
+   RSVP / CONFIRMATION DE PRÉSENCE
+   ========================================================= */
+
+.rsvp-section{
+    width:min(700px,94%);
+    margin:55px auto 45px;
+    padding:45px 24px;
+    text-align:center;
+    border-radius:26px;
+    background:linear-gradient(135deg,rgba(255,255,255,.32),rgba(255,255,255,.10));
+    border:1px solid rgba(255,255,255,.70);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 20px 55px rgba(50,10,20,.12),inset 0 1px 0 rgba(255,255,255,.75);
+    position:relative;
+    overflow:hidden;
+}
+
+.rsvp-section::before{
+    content:"";
+    position:absolute;
+    inset:11px;
+    border:1px solid rgba(201,167,101,.52);
+    border-radius:18px;
+    pointer-events:none;
+}
+
+.rsvp-form{
+    position:relative;
+    z-index:2;
+    width:min(520px,100%);
+    margin:30px auto 0;
+    direction:ltr;
+}
+
+.rsvp-field{
+    margin-bottom:18px;
+    text-align:left;
+}
+
+.rsvp-label{
+    display:block;
+    margin-bottom:8px;
+    font-family:"Montserrat",sans-serif;
+    font-size:10px;
+    letter-spacing:1.5px;
+    color:#66545a;
+}
+
+.rsvp-input,
+.rsvp-textarea{
+    width:100%;
+    border:1px solid rgba(201,167,101,.60);
+    border-radius:13px;
+    background:rgba(255,255,255,.48);
+    color:#302629;
+    outline:none;
+    font-family:"Montserrat",sans-serif;
+    font-size:13px;
+    padding:13px 15px;
+}
+
+.rsvp-input:focus,
+.rsvp-textarea:focus{
+    border-color:#c9a765;
+    box-shadow:0 0 0 3px rgba(201,167,101,.12);
+}
+
+.rsvp-textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.rsvp-choice{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.rsvp-choice label{
+    position:relative;
+    cursor:pointer;
+}
+
+.rsvp-choice input{
+    position:absolute;
+    opacity:0;
+}
+
+.rsvp-choice span{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:48px;
+    padding:10px;
+    border:1px solid rgba(201,167,101,.58);
+    border-radius:13px;
+    background:rgba(255,255,255,.32);
+    color:#5f5156;
+    font-family:"Montserrat",sans-serif;
+    font-size:11px;
+    transition:.3s ease;
+}
+
+.rsvp-choice input:checked + span{
+    background:#64152a;
+    border-color:#64152a;
+    color:white;
+}
+
+.rsvp-button{
+    width:100%;
+    margin-top:5px;
+    padding:15px 25px;
+    border:0;
+    border-radius:30px;
+    background:#64152a;
+    color:white;
+    font-family:"Montserrat",sans-serif;
+    font-size:10px;
+    letter-spacing:2px;
+    cursor:pointer;
+    transition:.3s ease;
+}
+
+.rsvp-button:hover{
+    background:#3d0b19;
+    transform:translateY(-2px);
+}
+
+.rsvp-button:disabled{
+    opacity:.65;
+    cursor:wait;
+}
+
+.rsvp-status{
+    min-height:24px;
+    margin-top:14px;
+    font-family:"Cormorant Garamond",serif;
+    font-size:19px;
+    color:#64152a;
+}
+
+@media(max-width:650px){
+    .rsvp-section{
+        width:97%;
+        padding:36px 17px;
+        margin-top:40px;
+    }
+
+    .rsvp-choice{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="page-background"></div>
+
+
+<!-- =====================================================
+     INTRO VIDEO
+===================================================== -->
+
+<div id="intro">
+
+    <video
+        id="introVideo"
+        src="intro.mp4"
+        playsinline
+        muted
+        autoplay
+    ></video>
+
+    <div class="intro-overlay"></div>
+
+    <button
+        class="skip-button"
+        id="skipButton"
+    >
+        OUVRIR L'INVITATION
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     MUSIC
+===================================================== -->
+
+<audio
+    id="weddingMusic"
+    src="music.mp3"
+    loop
+    preload="auto"
+></audio>
+
+
+<!-- =====================================================
+     INVITATION
+===================================================== -->
+
+<main id="invitation">
+
+<div class="invitation-content">
+
+<!-- =====================================================
+     QURAN & WEDDING DUA
+     يظهر مباشرة بعد انتهاء فيديو الافتتاح
+===================================================== -->
+
+<section class="quran-dua">
+
+    <div class="quran-dua-label">
+        قال الله تعالى
+    </div>
+
+    <div class="quran-verse">
+        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ
+        أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم
+        مَّوَدَّةً وَرَحْمَةً
+    </div>
+
+    <div class="quran-reference">
+        سورة الروم — الآية 21
+    </div>
+
+    <div class="dua-divider"></div>
+
+    <div class="wedding-dua">
+        بارك الله لكما، وبارك عليكما، وجمع بينكما في خير
+    </div>
+
+</section>
+
+
+<!-- MUSIC -->
+
+<button
+    class="music-control"
+    id="musicControl"
+    aria-label="Musique"
+>
+
+    <div class="music-icon">
+
+        <div class="music-note"></div>
+
+    </div>
+
+</button>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+<div class="hero-card">
+
+
+<div class="monogram-wrapper">
+
+    <div class="monogram-decoration"></div>
+
+    <div class="monogram">
+        W &amp; H
+    </div>
+
+</div>
+
+
+<div class="ornament">
+
+    <span></span>
+    <i></i>
+    <span></span>
+
+</div>
+
+
+<div class="invitation-label">
+    دعوة زفاف
+</div>
+
+
+<div class="invitation-label-fr">
+    Une invitation à partager
+    un moment d'exception
+</div>
+
+
+<div class="bride-name">Hadil</div>
+<div class="bride-name-ar">هديل</div>
+
+
+<div class="family">
+
+    تتشرف عائلة كشاط
+
+    <br>
+
+    بدعوتكم لحضور حفل زفاف ابنتهم
+
+</div>
+
+
+<div class="family-fr">
+
+    La famille Kechat serait honorée
+    de vous compter parmi ses invités
+    pour célébrer le mariage de leur fille.
+
+</div>
+
+
+<div class="date-card">
+
+    <div class="date-day">
+        DIMANCHE
+    </div>
+
+    <div class="date-number">
+        27
+    </div>
+
+    <div class="date-month">
+        DECEMBRE 2026
+    </div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     COUNTDOWN
+===================================================== -->
+
+<section class="section countdown-section">
+
+<div class="ornament">
+
+    <span></span>
+    <i></i>
+    <span></span>
+
+</div>
+
+
+<div class="section-title-ar">
+    نترقّب حضوركم
+</div>
+
+
+<div class="section-title-fr">
+    Le compte à rebours commence
+</div>
+
+
+<div class="countdown">
+
+
+<div class="count-box">
+
+    <div
+        class="count-number"
+        id="days"
+    >
+        00
+    </div>
+
+    <div class="count-label">
+        DAYS
+    </div>
+
+</div>
+
+
+<div class="count-box">
+
+    <div
+        class="count-number"
+        id="hours"
+    >
+        00
+    </div>
+
+    <div class="count-label">
+        HOURS
+    </div>
+
+</div>
+
+
+<div class="count-box">
+
+    <div
+        class="count-number"
+        id="minutes"
+    >
+        00
+    </div>
+
+    <div class="count-label">
+        MINUTES
+    </div>
+
+</div>
+
+
+<div class="count-box">
+
+    <div
+        class="count-number"
+        id="seconds"
+    >
+        00
+    </div>
+
+    <div class="count-label">
+        SECONDS
+    </div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     DETAILS
+===================================================== -->
+
+<section class="section details">
+
+<div class="ornament">
+
+    <span></span>
+    <i></i>
+    <span></span>
+
+</div>
+
+
+<div class="section-title-ar">
+    تفاصيل الأمسية
+</div>
+
+
+<div class="section-title-fr">
+    Les détails de votre soirée
+</div>
+
+
+<div class="detail-grid">
+
+
+<div class="detail-card">
+
+    <div class="detail-icon clock-icon"></div>
+
+    <div class="detail-ar">
+        بداية استقبال المدعوين
+    </div>
+
+    <div class="detail-fr">
+        ACCUEIL DES INVITÉS
+    </div>
+
+    <div class="detail-time">
+        15:00
+    </div>
+
+</div>
+
+
+<div class="detail-card">
+
+    <div class="detail-icon clock-icon"></div>
+
+    <div class="detail-ar">
+        بداية التصديرة
+    </div>
+
+    <div class="detail-fr">
+        DÉBUT DE LA CÉRÉMONIE
+    </div>
+
+    <div class="detail-time">
+        15:30
+    </div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     LOCATION
+===================================================== -->
+
+<section class="section">
+
+<div class="ornament">
+
+    <span></span>
+    <i></i>
+    <span></span>
+
+</div>
+
+
+<div class="section-title-ar">
+    مكان الاحتفال
+</div>
+
+
+<div class="section-title-fr">
+    Le lieu de la célébration
+</div>
+
+
+<div class="location-card">
+
+
+<div class="location-icon"></div>
+
+
+<div class="location-name">
+    قاعة الأفراح الأنفال
+</div>
+
+
+<div class="location-fr">
+    Salle des fêtes Al Anfal
+</div>
+
+
+<div class="location-city">
+    EL OURICIA
+</div>
+
+
+<a
+    class="maps-button"
+    href="https://maps.app.goo.gl/KjDapWsXSndpunCE8?g_st=ai"
+    target="_blank"
+    rel="noopener"
+>
+
+    VOIR L'ITINÉRAIRE
+
+</a>
+
+
+<!-- =====================================================
+     QR CODE
+===================================================== -->
+
+<div class="qr-section">
+
+
+<div class="qr-title">
+
+    امسح الرمز للوصول إلى القاعة
+
+</div>
+
+
+<div class="qr-subtitle">
+
+    Scannez le QR code pour accéder à la salle
+
+</div>
+
+
+<div class="qr-frame">
+
+    <div id="qrcode"></div>
+
+</div>
+
+
+<div class="qr-note">
+
+    افتح كاميرا هاتفك ووجّهها نحو الرمز
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     PRIVACY
+===================================================== -->
+
+<section class="section privacy">
+
+<div class="ornament">
+
+    <span
+        style="background:rgba(255,255,255,.4)"
+    ></span>
+
+    <i
+        style="border-color:rgba(255,255,255,.7)"
+    ></i>
+
+    <span
+        style="background:rgba(255,255,255,.4)"
+    ></span>
+
+</div>
+
+
+<div class="section-title-ar">
+    بكل محبة وخصوصية
+</div>
+
+
+<div class="section-title-fr">
+    Avec toute notre délicatesse
+</div>
+
+
+<div class="privacy-grid">
+
+
+<!-- CAMERA -->
+
+<div class="privacy-card">
+
+
+<div class="privacy-icon camera-icon">
+
+    <span></span>
+
+</div>
+
+
+<div class="privacy-ar">
+
+    نرجو منكم بكل لطف احترام
+    خصوصية هذه المناسبة،
+    والامتناع عن التقاط الصور.
+
+</div>
+
+
+<div class="privacy-fr">
+
+    Nous vous invitons à préserver
+    l’intimité de ce précieux moment
+    en vous abstenant de toute prise de photos.
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+
+<footer class="footer">
+
+<div class="footer-monogram">
+    W &amp; H
+</div>
+
+
+<div class="footer-text">
+    حضوركم يكمّل فرحتنا
+</div>
+
+
+<div class="footer-text-fr">
+
+    Votre présence rendra ce moment
+    encore plus précieux.
+
+</div>
+
+</footer>
+
+
+</div>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const intro =
+    document.getElementById("intro");
+
+const introVideo =
+    document.getElementById("introVideo");
+
+const skipButton =
+    document.getElementById("skipButton");
+
+const invitation =
+    document.getElementById("invitation");
+
+const music =
+    document.getElementById("weddingMusic");
+
+const musicControl =
+    document.getElementById("musicControl");
+
+
+let invitationOpened = false;
+
+let musicPlaying = false;
+
+
+/* =========================================================
+   OPEN INVITATION
+========================================================= */
+
+function openInvitation(){
+
+    if(invitationOpened){
+        return;
+    }
+
+    invitationOpened = true;
+
+    introVideo.pause();
+
+    intro.classList.add("hidden");
+
+    invitation.style.display = "block";
+
+    invitation.classList.add("show");
+
+    document.body.style.overflowY = "auto";
+
+
+    music.play()
+
+        .then(function(){
+
+            musicPlaying = true;
+
+            musicControl.classList.add("playing");
+
+        })
+
+        .catch(function(){
+
+            /*
+               بعض المتصفحات تمنع تشغيل الصوت تلقائياً.
+               عندها يستطيع المستخدم تشغيله من الزر.
+            */
+
+            musicPlaying = false;
+
+        });
+
+}
+
+
+/* =========================================================
+   VIDEO ENDED
+========================================================= */
+
+introVideo.addEventListener(
+    "ended",
+    function(){
+
+        openInvitation();
+
+    }
+);
+
+
+/* =========================================================
+   SKIP
+========================================================= */
+
+skipButton.addEventListener(
+    "click",
+    function(){
+
+        openInvitation();
+
+    }
+);
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+musicControl.addEventListener(
+    "click",
+    function(){
+
+        if(musicPlaying){
+
+            music.pause();
+
+            musicPlaying = false;
+
+            musicControl.classList.remove("playing");
+
+        }
+
+        else{
+
+            music.play()
+
+                .then(function(){
+
+                    musicPlaying = true;
+
+                    musicControl.classList.add("playing");
+
+                })
+
+                .catch(function(){});
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+const weddingDate =
+    new Date(
+        "2026-12-27T15:00:00+01:00"
+    ).getTime();
+
+
+function updateCountdown(){
+
+    const now =
+        new Date().getTime();
+
+    const distance =
+        weddingDate - now;
+
+
+    if(distance <= 0){
+
+        document.getElementById("days")
+            .textContent = "00";
+
+        document.getElementById("hours")
+            .textContent = "00";
+
+        document.getElementById("minutes")
+            .textContent = "00";
+
+        document.getElementById("seconds")
+            .textContent = "00";
+
+        return;
+
+    }
+
+
+    const days =
+        Math.floor(
+            distance /
+            (1000 * 60 * 60 * 24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (
+                distance %
+                (1000 * 60 * 60 * 24)
+            )
+            /
+            (1000 * 60 * 60)
+        );
+
+
+    const minutes =
+        Math.floor(
+            (
+                distance %
+                (1000 * 60 * 60)
+            )
+            /
+            (1000 * 60)
+        );
+
+
+    const seconds =
+        Math.floor(
+            (
+                distance %
+                (1000 * 60)
+            )
+            /
+            1000
+        );
+
+
+    document.getElementById("days")
+        .textContent =
+        String(days).padStart(2,"0");
+
+
+    document.getElementById("hours")
+        .textContent =
+        String(hours).padStart(2,"0");
+
+
+    document.getElementById("minutes")
+        .textContent =
+        String(minutes).padStart(2,"0");
+
+
+    document.getElementById("seconds")
+        .textContent =
+        String(seconds).padStart(2,"0");
+
+}
+
+
+updateCountdown();
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+
+/* =========================================================
+   QR CODE
+========================================================= */
+
+new QRCode(
+    document.getElementById("qrcode"),
+    {
+
+        text:
+        "https://maps.app.goo.gl/KjDapWsXSndpunCE8?g_st=ai",
+
+        width:150,
+
+        height:150,
+
+        colorDark:"#64152a",
+
+        colorLight:"#ffffff",
+
+        correctLevel:
+            QRCode.CorrectLevel.H
+
+    }
+);
+
+
+/* =========================================================
+   LOCK SCROLL DURING INTRO
+========================================================= */
+
+document.body.style.overflow = "hidden";
+
+
+/* =========================================================
+   AUTOPLAY VIDEO
+========================================================= */
+
+introVideo.play()
+
+    .catch(function(){});
+
+
+
+
+
+</script>
+
+</body>
+</html>
